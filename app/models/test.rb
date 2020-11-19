@@ -1,10 +1,7 @@
 class Test < ApplicationRecord
-  belongs_to :category
 
   def self.all_titles_by_category(name)
-    joins(:categories)
-        .where(categories: { title: name })
-        .order(title: :desc)
-        .pluck(:title)
+    category_id = Category.where(title: name).first.id
+    self.where(category_id: category_id).order(title: :desc).pluck(:title)
   end
 end
