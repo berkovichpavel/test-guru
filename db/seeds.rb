@@ -15,14 +15,14 @@ users = User.create!(
 
 tests = Test.create!(
   [
-    { title: 'Basic question about Ruby', level: 1, category_id: categories[0].id },
-    { title: 'Advanced question about Ruby', level: 2, category_id: categories[0].id },
-    { title: 'Basic question about HTML', level: 1, category_id: categories[1].id },
-    { title: 'Advanced question about HTML', level: 2, category_id: categories[1].id },
-    { title: 'Basic question about HTTP', level: 1, category_id: categories[2].id },
-    { title: 'Advanced question about HTTP', level: 2, category_id: categories[2].id },
-    { title: 'Basic question about Rails', level: 1, category_id: categories[3].id },
-    { title: 'Advanced question about Rails', level: 2, category_id: categories[3].id }
+    { title: 'Basic question about Ruby', level: 1, category_id: categories[0].id, author_id: users[0].id },
+    { title: 'Advanced question about Ruby', level: 2, category_id: categories[0].id, author_id: users[0].id },
+    { title: 'Basic question about HTML', level: 1, category_id: categories[1].id, author_id: users[0].id },
+    { title: 'Advanced question about HTML', level: 2, category_id: categories[1].id, author_id: users[0].id },
+    { title: 'Basic question about HTTP', level: 1, category_id: categories[2].id, author_id: users[1].id },
+    { title: 'Advanced question about HTTP', level: 2, category_id: categories[2].id, author_id: users[1].id },
+    { title: 'Basic question about Rails', level: 1, category_id: categories[3].id, author_id: users[1].id },
+    { title: 'Advanced question about Rails', level: 2, category_id: categories[3].id, author_id: users[1].id }
   ]
 )
 
@@ -73,7 +73,7 @@ Answer.create!(
   ]
 )
 
-UserTest.create!(
+TestsUser.create!(
   [
     { user_id: users[0].id, test_id: tests[0].id },
     { user_id: users[0].id, test_id: tests[1].id },
