@@ -6,12 +6,18 @@ class Test < ApplicationRecord
   has_many :tests_users
   has_many :users, through: :tests_users
 
+  scope :easy, -> { where(level: 0..1) }
+  scope :medium, -> { where(level: 2..4) }
+  scope :difficult, -> { where(level: 5..Float::INFINITY) }
+  scope :titles_by_category, ->(category) {
+    joins(:category).where(categories: { title: category }).order(title: :desc)
+  }
 
-  def self.all_titles_by_category(name)
-    # joins('INNER JOIN categories ON tests.category_id = categories.id')
-    #   .where(categories: { title: name })
-    #   .order(title: :desc)
-    #   .pluck(:title)
-    joins(:category).where(categories: { title: name }).order(title: :desc).pluck(:title)
+  validates :title, presence: true, uniqueness: { scope: :level, message: 'within same level should be unique' }
+  validates :level, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
+
+  def self.all_titles_by_category(category)
+    titles_by_category(category).pluck(:title)
   end
 end
