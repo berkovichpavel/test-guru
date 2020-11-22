@@ -1,7 +1,7 @@
 class Question < ApplicationRecord
-  # MIN_NUM_ANSWERS = 1
-  # MAX_NUM_ANSWERS = 4
-
+  MIN_NUM_ANSWERS = 1
+  MAX_NUM_ANSWERS = 4
+  
   belongs_to :test
   has_many :answers
 
@@ -9,7 +9,7 @@ class Question < ApplicationRecord
   validates :validate_number_of_answers
 
   def validate_number_of_answers
-    errors.add(:question, "Can't have more than #{4} answers") if question.answers.count > 4
-    errors.add(:question, "Can't have less than #{1} answers") if question.answers.count < 1
+    errors.add(:question, "Can't have more than #{MAX_NUM_ANSWERS} answers") if question.answers.count > MAX_NUM_ANSWERS
+    errors.add(:question, "Can't have less than #{MIN_NUM_ANSWERS} answers") if question.answers.count < MIN_NUM_ANSWERS
   end
 end
