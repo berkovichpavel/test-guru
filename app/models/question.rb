@@ -6,7 +6,7 @@ class Question < ApplicationRecord
   has_many :answers
 
   validates :body, presence: true
-  # validates :validate_number_of_answers
+  validates :validate_number_of_answers
 
   def validate_number_of_answers
     errors.add(:question, "Can't have more than #{MAX_NUM_ANSWERS} answers") if answers.count > MAX_NUM_ANSWERS
