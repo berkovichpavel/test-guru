@@ -10,7 +10,7 @@ class Test < ApplicationRecord
   scope :medium, -> { where(level: 2..4) }
   scope :difficult, -> { where(level: 5..Float::INFINITY) }
   scope :titles_by_category, ->(category) {
-    joins(:category).where(categories: { title: category }).order(title: :desc)
+    joins(:category).where(categories: { title: category })
   }
 
   validates :title, presence: true, uniqueness: { scope: :level, message: 'within same level should be unique' }
@@ -18,6 +18,6 @@ class Test < ApplicationRecord
 
 
   def self.all_titles_by_category(category)
-    titles_by_category(category).pluck(:title)
+    titles_by_category(category).order(title: :desc).pluck(:title)
   end
 end
