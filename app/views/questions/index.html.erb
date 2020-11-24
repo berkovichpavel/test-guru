@@ -1,4 +1,4 @@
 <h2> All questions from test "<%= @test.title %>"</h2>
-<%= @questions.each.with_index(1) do |question, index| %>
-  <h3><%= index %>. <%= question %></h3>
+<% @questions.each.with_index(1) do |question, index| %>
+  <h3><%= index %>. <%= question.body %></h3>
 <% end %>

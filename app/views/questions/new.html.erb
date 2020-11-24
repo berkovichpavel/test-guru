@@ -1,0 +1,5 @@
+<%= simple_form_for @question do |f| %>
+  <%= f.label(:body, 'New question:') %>:<br>
+  <%= f.text_area(:body) %><br>
+  <%= f.button :submit, class: 'btn btn-success' %>
+<% end %>
