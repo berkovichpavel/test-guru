@@ -1,7 +1,8 @@
 class QuestionsController < ApplicationController
-
-  before_action :find_test, only: %i[index create new]
+  before_action :find_test, only: %i[index create new destroy]
   before_action :find_question, only: %i[show destroy]
+
+  rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_question_not_found
 
 
   def index
@@ -11,21 +12,23 @@ class QuestionsController < ApplicationController
 
   def show; end
 
-  def new; end
+  def new
+    @question = Question.new
+  end
 
   def create
-    question = @test.questions.create!(question_params)
-    redirect_to question_path(question)
+    @question = @test.questions.create!(question_params)
+    redirect_to question_path(@question)
   end
 
   def destroy
-    @question.destroy!
+    @question.destroy
   end
 
   private
 
   def question_params
-    params.permit(:body)
+    params.require(:question).permit(:body)
   end
 
   def find_question
@@ -37,7 +40,7 @@ class QuestionsController < ApplicationController
   end
 
   def rescue_with_question_not_found
-    render plain: "Question doesn't exist" 
+    render plain: "Question doesn't exist"
   end
 
 end

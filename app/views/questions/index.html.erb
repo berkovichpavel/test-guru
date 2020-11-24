@@ -2,3 +2,5 @@
 <% @questions.each.with_index(1) do |question, index| %>
   <h3><%= index %>. <%= question.body %></h3>
 <% end %>
+
+<%= link_to 'Add new question', new_test_question_path %>
