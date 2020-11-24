@@ -1,6 +1,8 @@
 <h2> All questions from test "<%= @test.title %>"</h2>
 <% @questions.each.with_index(1) do |question, index| %>
-  <h3><%= index %>. <%= question.body %></h3>
+  <h3><%= index %>. <%= question.body %>
+    <br/><small><%= link_to 'Show',  question_path(question) %></small>
+  </h3>
 <% end %>
 
 <%= link_to 'Add new question', new_test_question_path %>

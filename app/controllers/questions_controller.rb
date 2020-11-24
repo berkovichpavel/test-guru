@@ -4,10 +4,8 @@ class QuestionsController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_question_not_found
 
-
   def index
-    @test = Test.find(params[:test_id])
-    @questions = Question.where(test: @test)
+    @questions = @test.questions
   end
 
   def show; end
@@ -17,12 +15,13 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = @test.questions.create!(question_params)
+    @question = @test.questions.create(question_params)
     redirect_to question_path(@question)
   end
 
   def destroy
     @question.destroy
+    redirect_to test_questions_path
   end
 
   private
@@ -40,7 +39,6 @@ class QuestionsController < ApplicationController
   end
 
   def rescue_with_question_not_found
-    render plain: "Question doesn't exist"
+    render plain: "Question doesn't exist", status: 404
   end
-
 end
