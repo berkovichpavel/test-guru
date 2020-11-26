@@ -1,4 +1,4 @@
-<%= question_form_header(@question.test, @method) %>
+<%= question_form_header(@question) %>
 <%= simple_form_for [@test, @question] do |f| %>
   <%= f.label(:body, 'Body') %>:<br>
   <%= f.text_area(:body) %><br>

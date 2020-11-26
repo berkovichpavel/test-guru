@@ -1,7 +1,6 @@
 module QuestionsHelper
-  METHODS = { edit: 'Edit', new: 'Create new' }.freeze
-
-  def question_form_header(test, method)
-    "#{METHODS[method]} '#{test.title}' Question"
+  def question_form_header(question)
+    method = question.new_record? ? 'Create new' : 'Edit'
+    "#{method} '#{question.test.title}' Question"
   end
 end

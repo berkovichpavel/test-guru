@@ -12,7 +12,6 @@ class QuestionsController < ApplicationController
 
   def new
     @question = @test.questions.new
-    @method = :new
   end
 
   def create
@@ -24,9 +23,7 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def edit
-    @method = :edit
-  end
+  def edit; end
 
   def update
     @question.update(question_params) ? (redirect_to question_path(@question)) : (render :edit)
