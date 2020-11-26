@@ -1,0 +1,10 @@
+<h2>Test: <em>"<%= @test.title %>"</em></h2>
+<h3>
+  <%= pluralize(@test.questions.count, 'question', locale: :en) %> in Test
+</h3>
+<ol>
+  <%= render @test.questions %>
+</ol>
+
+<p><%= link_to 'Add new question', new_test_question_path(@test) %></p>
+<p><%= link_to 'Back', tests_path %></p>
