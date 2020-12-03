@@ -1,3 +1,5 @@
 <h2> Question with id: <%= @question.id %></h2>
 <h3><%= @question.body %></h3>
 <%= link_to 'Destroy', question_path(@question), method: :delete, data: { confirm: "Are you sure?"} %>
+<%= link_to 'Edit', edit_question_path(@question) %>
+<p><%= link_to 'Back', test_path(@question.test) %></p>
